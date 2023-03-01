@@ -19,18 +19,17 @@ describe('Engineer', () => {
   });
   describe('getGithub', () => {
     // Positive test
-    it("Should return a url to the users github portfolio", () => {
+    it("Should return a url to the users github username", () => {
       // Arrange
       const name = 'Sinthushan';
       const id = '123';
       const email = 'sinthushan@gmail.com';
       const github = 'sinthushan'
-      const github_url = `https://github.com/${github}`;
       // Act
       const obj = new Engineer(name, id, email, github);
       const result = obj.getGithub();
       // Assert
-      expect(result).toEqual(github_url);
+      expect(result).toEqual(github);
     });
   });
 });
