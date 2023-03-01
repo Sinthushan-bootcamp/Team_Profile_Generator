@@ -6,33 +6,41 @@ function createCard(employee){
         case 'Manager':
             label = "officeNumber"
             answer = employee.officeNumber
+            icon = '<img src="https://img.icons8.com/external-kiranshastry-lineal-kiranshastry/64/000000/external-coffee-cup-camping-kiranshastry-lineal-kiranshastry.png" style="width: 2rem;height: 2rem;" class="me-2"/>'
             break;
         case 'Engineer':
             label = "gitHub"
-            answer = employee.getGithub()
+            answer = `<a href=https://github.com/${employee.getGithub()}>${employee.getGithub()}</a>`
+            icon = '<img src="https://img.icons8.com/ios/50/000000/glasses.png" style="width: 2rem;height: 2rem;" class="me-2"/>'
             break;
         case 'Intern':
             label = "school"
             answer = employee.getSchool()
+            icon = '<img src="https://img.icons8.com/ios-filled/50/000000/student-male--v1.png" style="width: 2rem;height: 2rem;" class="me-2"/>'
             break;
     }
-    return `<div class="card" style="width: 18rem;">
-                <div class="card-body">
+    return `<div class="card m-2 shadow" style="width: 18rem;">
+                <div class="card-body bg-primary text-white">
                     <h5 class="card-title">${employee.getName()}</h5>
-                    <h5 class="card-title">${employee.getRole()}</h5>
+                    <div class="d-flex flex-row">
+                        ${icon}
+                        <h5 class="card-title">${employee.getRole()}</h5>
+                    </div>
                 </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">id: ${employee.getId()}</li>
-                    <li class="list-group-item">email: ${employee.getEmail()}</li>
-                    <li class="list-group-item">${label}: ${answer}</li>
-                </ul>
+                <div class="card-body bg-light">
+                    <ul class="list-group list-group-flush m-2">
+                        <li class="list-group-item">id: ${employee.getId()}</li>
+                        <li class="list-group-item">email: <a href="mailto: ${employee.getEmail()}">${employee.getEmail()}</a></li>
+                        <li class="list-group-item">${label}: ${answer}</li>
+                    </ul>
+                </div>
             </div>`
 }
 
 function makeHTMLFile(team){
     html = generateHTML(team)
     fs.writeFile('dist/index.html', html, (err) =>
-      err ?  console.log(err) : console.log('Success!')
+      err ?  console.log(err) : console.log('Please see the "dist" folder for your webpage!')
     );
 }
 
