@@ -1,7 +1,9 @@
 const fs = require('fs');
 
 function createCard(employee){
+// function to create card for a give employee
     role = employee.getRole()
+    // depending on the role of the employee, the final data point will differ as well as the icon
     switch(role) {
         case 'Manager':
             label = "officeNumber"
@@ -37,17 +39,14 @@ function createCard(employee){
             </div>`
 }
 
-function makeHTMLFile(team){
-    html = generateHTML(team)
-    fs.writeFile('dist/index.html', html, (err) =>
-      err ?  console.log(err) : console.log('Please see the "dist" folder for your webpage!')
-    );
-}
-
 function generateHTML(team){
+// THis function will return html including adding cards for each team member
     const card = []
-    card.push(createCard(team.manager))
-    card.push(...team.employees.map(employee => createCard(employee)))
+    card.push(createCard(team.manager)) // create a card for the team manager and push it into the card array
+    // for each employee create a card and push the individual cards into the card array
+    // utilizes map to push each employee into the createCard function
+    // utilizes the spread operator to push each employee card into the card array
+    card.push(...team.employees.map(employee => createCard(employee))) 
     return `<!DOCTYPE html>
     <html lang="en">
     <head>
@@ -68,6 +67,14 @@ function generateHTML(team){
     </body>
     </html>
     `
+}
+
+function makeHTMLFile(team){
+// This function takes generated HTML and saves the final HTML file into the dist folder
+    html = generateHTML(team)
+    fs.writeFile('dist/index.html', html, (err) =>
+      err ?  console.log(err) : console.log('Please see the "dist" folder for your webpage!')
+    );
 }
 
 module.exports = makeHTMLFile
